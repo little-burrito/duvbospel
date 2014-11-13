@@ -1,0 +1,212 @@
+fileFormatVersion: 2
+guid: 50383619ce3ab2f42922b5008ac19d70
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Huvud
+    21300002: Arm 1
+    21300004: Arm 2
+    21300006: Arm 2 Hand
+    21300008: Arm 3
+    21300010: Arm 3 Hand
+    21300012: Arm 4
+    21300014: Arm5
+    21300016: Arm 5 Hand
+    21300018: Arm 6 Hand
+    21300020: Arm 6
+    21300022: Arm 7
+    21300024: Arm 7 Hand
+    21300026: Arm 8
+    21300028: Arm 8 Hand
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Huvud
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 1807
+        width: 669
+        height: 566
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arm 1
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 1428
+        width: 645
+        height: 182
+      alignment: 9
+      pivot: {x: .967559397, y: .530341864}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arm 2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 1178
+        width: 477
+        height: 136
+      alignment: 9
+      pivot: {x: .962375104, y: .82743299}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arm 2 Hand
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 1166
+        width: 133
+        height: 145
+      alignment: 9
+      pivot: {x: .697220564, y: .300059766}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arm 3
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 791
+        width: 418
+        height: 313
+      alignment: 9
+      pivot: {x: .929355621, y: .945479035}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arm 3 Hand
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 693
+        width: 142
+        height: 161
+      alignment: 9
+      pivot: {x: .879163384, y: .234181657}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arm 4
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 343
+        width: 367
+        height: 444
+      alignment: 9
+      pivot: {x: .958927333, y: .944634795}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arm5
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 404
+        width: 164
+        height: 352
+      alignment: 9
+      pivot: {x: .247461826, y: .94710803}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arm 5 Hand
+      rect:
+        serializedVersion: 2
+        x: 1311
+        y: 250
+        width: 289
+        height: 187
+      alignment: 9
+      pivot: {x: .208605066, y: .780538797}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arm 6 Hand
+      rect:
+        serializedVersion: 2
+        x: 1815
+        y: 615
+        width: 125
+        height: 125
+      alignment: 9
+      pivot: {x: .223890632, y: .731932104}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arm 6
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 775
+        width: 842
+        height: 329
+      alignment: 9
+      pivot: {x: .0343535133, y: .986757398}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arm 7
+      rect:
+        serializedVersion: 2
+        x: 1016
+        y: 1186
+        width: 682
+        height: 413
+      alignment: 9
+      pivot: {x: .0445420593, y: .453202158}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arm 7 Hand
+      rect:
+        serializedVersion: 2
+        x: 1815
+        y: 1467
+        width: 145
+        height: 101
+      alignment: 9
+      pivot: {x: .138202116, y: .595681369}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arm 8
+      rect:
+        serializedVersion: 2
+        x: 1291
+        y: 1603
+        width: 397
+        height: 567
+      alignment: 9
+      pivot: {x: .0583652891, y: .171299309}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arm 8 Hand
+      rect:
+        serializedVersion: 2
+        x: 1757
+        y: 2025
+        width: 214
+        height: 106
+      alignment: 9
+      pivot: {x: .229052395, y: .27859208}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

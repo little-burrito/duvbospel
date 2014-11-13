@@ -1,0 +1,146 @@
+fileFormatVersion: 2
+guid: 8c4200bfd80cbe34083156c09853af12
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: skogsmonster-split_1
+    21300002: skogsmonster-split_2
+    21300004: skogsmonster-split_3
+    21300006: skogsmonster-split_4
+    21300008: skogsmonster-split_5
+    21300010: skogsmonster-split_6
+    21300012: skogsmonster-split_7
+    21300014: skogsmonster-split_8
+    21300016: skogsmonster-split_9
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: skogsmonster-split_1
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 633
+        width: 246
+        height: 384
+      alignment: 9
+      pivot: {x: .881769419, y: .736137569}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: skogsmonster-split_2
+      rect:
+        serializedVersion: 2
+        x: 1123
+        y: 605
+        width: 368
+        height: 374
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: skogsmonster-split_3
+      rect:
+        serializedVersion: 2
+        x: 1511
+        y: 691
+        width: 186
+        height: 312
+      alignment: 9
+      pivot: {x: .169189453, y: .686834097}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: skogsmonster-split_4
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 1081
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: skogsmonster-split_5
+      rect:
+        serializedVersion: 2
+        x: 1063
+        y: 305
+        width: 210
+        height: 286
+      alignment: 9
+      pivot: {x: .561685026, y: .817051589}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: skogsmonster-split_6
+      rect:
+        serializedVersion: 2
+        x: 1363
+        y: 319
+        width: 172
+        height: 272
+      alignment: 9
+      pivot: {x: .368202388, y: .77384007}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: skogsmonster-split_7
+      rect:
+        serializedVersion: 2
+        x: 1047
+        y: 35
+        width: 154
+        height: 230
+      alignment: 2
+      pivot: {x: .5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: skogsmonster-split_8
+      rect:
+        serializedVersion: 2
+        x: 1447
+        y: 21
+        width: 158
+        height: 244
+      alignment: 9
+      pivot: {x: .254040688, y: .831809103}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: skogsmonster-split_9
+      rect:
+        serializedVersion: 2
+        x: 1167
+        y: 1013
+        width: 284
+        height: 317
+      alignment: 9
+      pivot: {x: .558423102, y: .15454717}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
