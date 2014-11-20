@@ -1,0 +1,119 @@
+fileFormatVersion: 2
+guid: 4dc96f139f6db6c4aa9e89e25092a3e1
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Val 5
+    21300002: Val 1
+    21300004: kropp2
+    21300006: kropp1
+    21300008: huvud
+    21300010: "stj\xE4rtfena"
+    21300012: kropp4
+    21300014: kropp3
+    21300016: Val 4
+    21300018: Val 6
+    21300020: Val 2
+    21300022: Val 3
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Val 4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 306
+        width: 319
+        height: 368
+      alignment: 9
+      pivot: {x: .0928391367, y: .329755127}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Val 5
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 306
+        width: 286
+        height: 394
+      alignment: 9
+      pivot: {x: .0565446988, y: .364259362}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Val 6
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 361
+        width: 325
+        height: 312
+      alignment: 9
+      pivot: {x: .104923755, y: .38174203}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Val 1
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 0
+        width: 229
+        height: 228
+      alignment: 9
+      pivot: {x: .546708882, y: .412874222}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Val 2
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 22
+        width: 212
+        height: 206
+      alignment: 9
+      pivot: {x: .240519688, y: .114278272}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Val 3
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 23
+        width: 224
+        height: 275
+      alignment: 9
+      pivot: {x: .145274028, y: .305520624}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

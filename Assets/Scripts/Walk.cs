@@ -37,6 +37,6 @@ public class Walk : MonoBehaviour {
         {
             this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
-        animator.SetFloat("HorizontalMovement", horizontalMovement);
+        animator.SetFloat("Speed", horizontalMovement);
     }
 }

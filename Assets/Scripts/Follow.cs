@@ -17,6 +17,6 @@ public class Follow : MonoBehaviour {
 
     void LateUpdate()
     {
-        this.gameObject.transform.position = new Vector3(objectToFollow.transform.position.x, objectToFollow.transform.position.y, this.gameObject.transform.position.z);
+        this.gameObject.transform.position = new Vector3(objectToFollow.transform.position.x, objectToFollow.transform.position.y + 5.0f, this.gameObject.transform.position.z);
     }
 }
