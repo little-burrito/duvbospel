@@ -16,6 +16,7 @@ public class WeaponAttack : MonoBehaviour {
 	}
 
     void OnTriggerEnter2D( Collider2D other ) {
+        /*
         if ( other.tag == "enemy" ) {
         Debug.Log( "Collision enter!" );
             if ( playerControl.facingRight ) {
@@ -25,5 +26,6 @@ public class WeaponAttack : MonoBehaviour {
             }
             Destroy( other );
         }
+        */
     }
 }

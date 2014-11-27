@@ -1,0 +1,168 @@
+fileFormatVersion: 2
+guid: 09ed5df0b52ce064d9d1af87cc7e6b06
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: huvud
+    21300002: "sp\xF6ke-4-split_1"
+    21300004: "sp\xF6ke-4-split_2"
+    21300006: "v\xE4nster arm"
+    21300008: "b\xE5l"
+    21300010: "h\xF6ger arm"
+    21300012: "v\xE4nster l\xE5r"
+    21300014: "sp\xF6ke-4-split_7"
+    21300016: "h\xF6ger l\xE5r"
+    21300018: "v\xE4nster smalben"
+    21300020: "h\xF6ger smalben"
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: huvud
+      rect:
+        serializedVersion: 2
+        x: 835
+        y: 1211
+        width: 394
+        height: 325
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "sp\xF6ke-4-split_1"
+      rect:
+        serializedVersion: 2
+        x: 1531
+        y: 1431
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "sp\xF6ke-4-split_2"
+      rect:
+        serializedVersion: 2
+        x: 1675
+        y: 1407
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "v\xE4nster arm"
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 850
+        width: 442
+        height: 399
+      alignment: 9
+      pivot: {x: 1.10812652, y: .540582716}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "b\xE5l"
+      rect:
+        serializedVersion: 2
+        x: 773
+        y: 661
+        width: 518
+        height: 505
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "h\xF6ger arm"
+      rect:
+        serializedVersion: 2
+        x: 1361
+        y: 987
+        width: 388
+        height: 412
+      alignment: 9
+      pivot: {x: -.209455982, y: -.0187814962}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "v\xE4nster l\xE5r"
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 307
+        width: 256
+        height: 236
+      alignment: 9
+      pivot: {x: .778305054, y: 1.23327899}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "sp\xF6ke-4-split_7"
+      rect:
+        serializedVersion: 2
+        x: 1059
+        y: 449
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "h\xF6ger l\xE5r"
+      rect:
+        serializedVersion: 2
+        x: 1081
+        y: 375
+        width: 314
+        height: 244
+      alignment: 9
+      pivot: {x: .262787849, y: 1.20343542}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "v\xE4nster smalben"
+      rect:
+        serializedVersion: 2
+        x: 573
+        y: 19
+        width: 262
+        height: 242
+      alignment: 9
+      pivot: {x: .796652496, y: 1.28954124}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "h\xF6ger smalben"
+      rect:
+        serializedVersion: 2
+        x: 1185
+        y: 19
+        width: 274
+        height: 290
+      alignment: 9
+      pivot: {x: .121784292, y: 1.19235992}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

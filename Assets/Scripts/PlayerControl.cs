@@ -22,13 +22,28 @@ public class PlayerControl : MonoBehaviour
 	private Transform groundCheck;			// A position marking where to check if the player is grounded.
 	private bool grounded = false;			// Whether or not the player is grounded.
 	private Animator anim;					// Reference to the player's animator component.
+    private float attackCooldown = 0.0f;
+    public float attackTime = 60.0f;
     
 	private Transform weapon;   			// Player weapon
+    public float weaponDamage = 100.0f;
+    public float weaponKnockback = 100.0f;
+    public float weaponReach = 5.0f;
+    public Transform weaponSoundHit;
+
+    public float health = 100.0f;
 
     private float horizontalInput = 0.0f;
 
     private Transform soundWoosh;
+    private Transform soundTakeDamage;
+    private Transform soundDefeat;
+    private bool didPlayDefeatSound = false;
 
+    private int resetTimer = 300;
+
+    public int numEnemies = 0;
+    public int defeatedEnemies = 0;
 
 	void Awake()
 	{
@@ -37,51 +52,105 @@ public class PlayerControl : MonoBehaviour
 		weapon = transform.Find("weapon");
 		anim = GetComponent<Animator>();
         soundWoosh = transform.Find("soundWoosh");
+        weaponSoundHit = transform.Find( "SoundWeaponHit" );
+        soundTakeDamage = transform.Find( "SoundTakeDamage" );
+        soundDefeat = transform.Find( "SoundDefeat" );
 	}
 
 
 	void Update()
 	{
-		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
-		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));  
+        if ( health <= 0 ) {
+            this.collider2D.enabled = false;
+            if ( !didPlayDefeatSound ) {
+                playSoundDefeat();
+                didPlayDefeatSound = true;
+            }
+        } else {
+            // The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
+            grounded = Physics2D.Linecast( transform.position, groundCheck.position, 1 << LayerMask.NameToLayer( "Ground" ) );
 
-		// Cache the horizontal input.
-		horizontalInput = Input.GetAxis("Horizontal");
+            // Cache the horizontal input.
+            horizontalInput = Input.GetAxis( "Horizontal" );
 
-        bool jumpTouchInput = false;
+            bool jumpTouchInput = false;
 
-        // Touch input overrides the horizontal input.
-        for ( int i = 0; i < Input.touchCount; i++ ) {
-            Touch touch = Input.GetTouch( i );
-            if ( touch.deltaPosition.y > 20.0f && Mathf.Abs( touch.deltaPosition.x ) < 30.0f ) {
-                jumpTouchInput = true;
-            } else if ( touch.position.x < Screen.width / 5 ) {
-                horizontalInput = -1.0f;
-            } else if ( touch.position.x > ( Screen.width / 5 ) * 4 ) {
-                horizontalInput = 1.0f;
+            anim.SetBool( "Attack", false );
+            // Touch input overrides the horizontal input.
+            for ( int i = 0; i < Input.touchCount; i++ ) {
+                // Walking
+                Touch touch = Input.GetTouch( i );
+                if ( touch.deltaPosition.y > 20.0f && Mathf.Abs( touch.deltaPosition.x ) < 30.0f ) {
+                    jumpTouchInput = true;
+                } else if ( touch.position.x < Screen.width / 5 ) {
+                    horizontalInput = -1.0f;
+                } else if ( touch.position.x > ( Screen.width / 5 ) * 4 ) {
+                    horizontalInput = 1.0f;
+                }
+
+                // Attacks
+                if ( attackCooldown <= 0 ) {
+                    if ( touch.phase == TouchPhase.Began ) {
+                        Vector2 worldPosition = Camera.main.ScreenToWorldPoint( new Vector3( touch.position.x, touch.position.y, 0.0f ) );
+                        Vector2 relativeWorldPosition = new Vector2( transform.position.x - worldPosition.x, transform.position.y - worldPosition.y );
+                        //if ( relativeWorldPosition.magnitude <= weaponReach ) {
+                        //Collider2D enemy = Physics2D.OverlapPoint( worldPosition, 1 << LayerMask.NameToLayer( "Enemies" ) );
+                        //if ( enemy ) {
+                        if ( relativeWorldPosition.x > 0 && facingRight ) {
+                            Flip();
+                        } else if ( relativeWorldPosition.x < 0 && !facingRight ) {
+                            Flip();
+                        }
+                        Vector2 hitPoint = new Vector2( transform.position.x - relativeWorldPosition.normalized.x * weaponReach, transform.position.y - relativeWorldPosition.normalized.y * weaponReach );
+                        RaycastHit2D[] hitEnemies = Physics2D.LinecastAll( transform.position, hitPoint, 1 << LayerMask.NameToLayer( "Enemies" ) );
+                        anim.SetBool( "Attack", true );
+                        foreach ( RaycastHit2D currentEnemy in hitEnemies ) {
+                            Enemy enemyScript = currentEnemy.collider.gameObject.GetComponent<Enemy>();
+                            enemyScript.health -= weaponDamage;
+                            if ( facingRight ) {
+                                currentEnemy.collider.gameObject.rigidbody2D.AddForce( new Vector2( 5000.0f * weaponKnockback, 100.0f * weaponKnockback ) );
+                            } else {
+                                currentEnemy.collider.gameObject.rigidbody2D.AddForce( new Vector2( -5000.0f * weaponKnockback, 100.0f * weaponKnockback ) );
+                            }
+                            enemyScript.playSoundTakeDamage();
+                            playSoundWeaponHit();
+                            //Destroy( other );
+                        }
+                        attackCooldown = attackTime;
+                        //}
+                        //}
+                    }
+                }
             }
 
-            if ( touch.position.x > ( Screen.width / 5 ) * 1.5 && touch.position.x < ( Screen.width / 5 ) * 3.5 && touch.phase == TouchPhase.Began ) {
-                anim.SetBool( "Attack", true );
-            } else {
-                anim.SetBool( "Attack", false );
+            // If the jump button is pressed and the player is grounded then the player should jump.
+            if ( ( jumpTouchInput || Input.GetButtonDown( "Jump" ) ) && grounded ) {
+                jump = true;
             }
-        }
+            if ( grounded ) {
+                anim.SetBool( "Jump", false );
+            }
 
-		// If the jump button is pressed and the player is grounded then the player should jump.
-        if ( ( jumpTouchInput || Input.GetButtonDown( "Jump" ) ) && grounded ) {
-            jump = true;
+            anim.SetFloat( "VerticalSpeed", this.rigidbody2D.velocity.y );
         }
-        if ( grounded ) {
-            anim.SetBool( "Jump", false );
-        }
-
-        anim.SetFloat("VerticalSpeed", this.rigidbody2D.velocity.y);
 	}
 
 
 	void FixedUpdate ()
 	{
+        if ( attackCooldown > 0 ) {
+            attackCooldown--;
+        } else {
+            attackCooldown = 0;
+        }
+
+        if ( health <= 0 && resetTimer != 0 ) {
+            resetTimer--;
+        }
+        if ( resetTimer <= 0 ) {
+            Application.LoadLevel( Application.loadedLevel );
+        }
+
 		// The Speed animator parameter is set to the absolute value of the horizontal input.
 		anim.SetFloat("Speed", Mathf.Abs(horizontalInput));
 
@@ -129,9 +198,10 @@ public class PlayerControl : MonoBehaviour
 		facingRight = !facingRight;
 
 		// Multiply the player's x local scale by -1.
-		Vector3 theScale = transform.localScale;
-		theScale.x *= -1;
-		transform.localScale = theScale;
+		//Vector3 theScale = transform.localScale;
+		//theScale.x *= -1;
+		//transform.localScale = theScale;
+        transform.Rotate( new Vector3( 0, 1.0f, 0 ), 180 );
 	}
 
 
@@ -174,5 +244,15 @@ public class PlayerControl : MonoBehaviour
 
     void playSoundWoosh() {
         soundWoosh.audio.Play();
+    }
+
+    void playSoundWeaponHit() {
+        weaponSoundHit.audio.Play();
+    }
+    public void playSoundTakeDamage() {
+        soundTakeDamage.audio.Play();
+    }
+    public void playSoundDefeat() {
+        soundDefeat.audio.Play();
     }
 }

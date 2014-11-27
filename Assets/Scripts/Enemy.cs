@@ -22,36 +22,94 @@ public class Enemy : MonoBehaviour
     private float horizontalInput = 0.0f;
 
     private GameObject player;
-    public float maxSpeed = 5.0f;
+    public float maxSpeed = 10.0f;
     public float moveForce = 5000.0f;
+
+    public float health = 100.0f;
+
+    public float attackDistance = 15.0f;
+    public float attackDamage = 15.0f;
+    public float attackTime = 200.0f;
+    public float attackKnockback = 0.5f;
+    public float attackCooldown = 0.0f;
+
+    private Transform soundScare;
+    private Transform soundTakeDamage;
+    private Transform soundDefeat;
+    private Transform soundAttack;
+    private bool didPlayDefeatSound;
+    private bool isAttacking = false;
 
     [HideInInspector]
     public bool facingRight = true;
 
+    private Animator anim;
 	
 	void Awake()
 	{
 		// Setting up the references.
 		//ren = transform.Find("body").GetComponent<SpriteRenderer>();
 		//frontCheck = transform.Find("frontCheck").transform;
+        anim = GetComponent<Animator>();
 		groundCheck = transform.Find("groundCheck");
         player = GameObject.FindGameObjectWithTag( "Player" );
+        soundScare = transform.Find( "SoundScare" );
+        soundTakeDamage = transform.Find( "SoundTakeDamage" );
+        soundDefeat = transform.Find( "SoundDefeat" );
+        soundAttack = transform.Find( "SoundAttack" );
+        PlayerControl playerControl = player.GetComponent<PlayerControl>();
+        playerControl.numEnemies++;
 	}
 
     void Update() {
 		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
-		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+        if ( health <= 0 ) {
+            this.collider2D.enabled = false;
+            if ( !didPlayDefeatSound ) {
+                playSoundDefeat();
+                didPlayDefeatSound = true;
+                PlayerControl playerControl = player.GetComponent<PlayerControl>();
+                playerControl.defeatedEnemies++;
+            }
+            if ( transform.position.y < -1000.0f ) {
+                Destroy( this );
+            }
+        } else {
+            grounded = Physics2D.Linecast( transform.position, groundCheck.position, 1 << LayerMask.NameToLayer( "Ground" ) );
 
-        if ( player.transform.position.x < this.gameObject.transform.position.x ) {
-            horizontalInput = -1.0f;
+            PlayerControl playerControl = player.GetComponent<PlayerControl>();
+            horizontalInput = 0;
+            if ( playerControl.enabled ) {
+                Vector2 playerRelativePosition = new Vector2( player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y );
+
+                if ( !isAttacking ) {
+                    if ( playerRelativePosition.x < 0 && health > 0 ) {
+                        horizontalInput = -1.0f;
+                    }
+                    if ( playerRelativePosition.x > 0 && health > 0 ) {
+                        horizontalInput = 1.0f;
+                    }
+                }
+                anim.SetFloat( "horizontalInput", horizontalInput );
+
+                if ( playerRelativePosition.magnitude < attackDistance ) {
+                    if ( attackCooldown <= 0 ) {
+                        attackBegins();
+                    }
+                }
+            }
         }
-        if ( player.transform.position.x > this.gameObject.transform.position.x ) {
-            horizontalInput = 1.0f;
-        }
+        anim.SetBool( "isAttacking", isAttacking );
     }
 
 	void FixedUpdate ()
 	{
+        if ( attackCooldown > 0 ) {
+            attackCooldown--;
+        } else {
+            attackCooldown = 0;
+        }
+
 		// The Speed animator parameter is set to the absolute value of the horizontal input.
 		//anim.SetFloat("Speed", Mathf.Abs(horizontalInput));
 
@@ -157,4 +215,42 @@ public class Enemy : MonoBehaviour
 		enemyScale.x *= -1;
 		transform.localScale = enemyScale;
 	}
+
+    public void playSoundScare() {
+        soundScare.audio.Play();
+    }
+    public void playSoundTakeDamage() {
+        soundTakeDamage.audio.Play();
+    }
+    public void playSoundDefeat() {
+        soundDefeat.audio.Play();
+    }
+    public void playSoundAttack() {
+        soundAttack.audio.Play();
+    }
+    public void attackBegins() {
+        isAttacking = true;
+    }
+    public void attackEnds() {
+        isAttacking = false;
+    }
+    public void dealAttackDamage() {
+        if ( health > 0 ) {
+            Vector2 playerRelativePosition = new Vector2( player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y );
+            if ( playerRelativePosition.magnitude < attackDistance ) {
+                if ( attackCooldown <= 0 ) {
+                    PlayerControl playerControl = player.GetComponent<PlayerControl>();
+                    playerControl.health -= attackDamage;
+                    playerControl.playSoundTakeDamage();
+                    //playSoundAttack();
+                    if ( this.facingRight ) {
+                        player.rigidbody2D.AddForce( new Vector2( 5000.0f * attackKnockback, 400.0f * attackKnockback ) );
+                    } else {
+                        player.rigidbody2D.AddForce( new Vector2( 5000.0f * attackKnockback, 400.0f * attackKnockback ) );
+                    }
+                    attackCooldown = attackTime;
+                }
+            }
+        }
+    }
 }

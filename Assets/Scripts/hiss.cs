@@ -31,17 +31,21 @@ public class hiss : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update() {
+    void Update() {
         if ( playerEntered ) {
-            for ( int i = 0; i < Input.touchCount; i++ ) {
-                Touch touch = Input.GetTouch( i );
-                if ( touch.phase == TouchPhase.Began ) {
-                    Vector3 pointWorldPosition = new Vector3( touch.position.x, touch.position.y, 0 );
-                    pointWorldPosition = Camera.main.ScreenToWorldPoint( pointWorldPosition );
-                    if ( Mathf.Abs( pointWorldPosition.x - knapp.position.x ) < buttonMargin && Mathf.Abs( pointWorldPosition.y - knapp.position.y ) < buttonMargin ) {
-                        if ( !anim.GetBool( "Hiss öppnas" ) ) {
-                            disablePlayerControls();
-                            anim.SetBool( "Hiss öppnas", true );
+            player = GameObject.FindGameObjectWithTag( "Player" );
+            PlayerControl playerControl = player.GetComponent<PlayerControl>();
+            if ( playerControl.defeatedEnemies == playerControl.numEnemies ) {
+                for ( int i = 0; i < Input.touchCount; i++ ) {
+                    Touch touch = Input.GetTouch( i );
+                    if ( touch.phase == TouchPhase.Began ) {
+                        Vector3 pointWorldPosition = new Vector3( touch.position.x, touch.position.y, 0 );
+                        pointWorldPosition = Camera.main.ScreenToWorldPoint( pointWorldPosition );
+                        if ( Mathf.Abs( pointWorldPosition.x - knapp.position.x ) < buttonMargin && Mathf.Abs( pointWorldPosition.y - knapp.position.y ) < buttonMargin ) {
+                            if ( !anim.GetBool( "Hiss öppnas" ) ) {
+                                disablePlayerControls();
+                                anim.SetBool( "Hiss öppnas", true );
+                            }
                         }
                     }
                 }
@@ -84,6 +88,8 @@ public class hiss : MonoBehaviour {
         }
         PlayerControl playerControl = player.GetComponent<PlayerControl>();
         playerControl.enabled = false;
+        Animator playerAnimator = player.GetComponent<Animator>();
+        playerAnimator.SetBool( "Attack", false );
     }
 
     void enablePlayerControls() {
