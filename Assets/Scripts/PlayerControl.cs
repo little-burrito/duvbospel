@@ -45,6 +45,10 @@ public class PlayerControl : MonoBehaviour
     public int numEnemies = 0;
     public int defeatedEnemies = 0;
 
+    void Start() {
+        PlayerPrefs.SetString( "savedLevelName", Application.loadedLevelName );
+    }
+
 	void Awake()
 	{
 		// Setting up references.
@@ -71,7 +75,7 @@ public class PlayerControl : MonoBehaviour
             grounded = Physics2D.Linecast( transform.position, groundCheck.position, 1 << LayerMask.NameToLayer( "Ground" ) );
 
             // Cache the horizontal input.
-            horizontalInput = Input.GetAxis( "Horizontal" );
+            //horizontalInput = Input.GetAxis( "Horizontal" );
 
             bool jumpTouchInput = false;
 
@@ -83,44 +87,11 @@ public class PlayerControl : MonoBehaviour
                 if ( touch.deltaPosition.y > 20.0f && Mathf.Abs( touch.deltaPosition.x ) < 30.0f ) {
                     jumpTouchInput = true;
                 } else if ( touch.position.x < Screen.width / 5 ) {
-                    horizontalInput = -1.0f;
+                    //horizontalInput = -1.0f;
                 } else if ( touch.position.x > ( Screen.width / 5 ) * 4 ) {
-                    horizontalInput = 1.0f;
+                    //horizontalInput = 1.0f;
                 }
 
-                // Attacks
-                if ( attackCooldown <= 0 ) {
-                    if ( touch.phase == TouchPhase.Began ) {
-                        Vector2 worldPosition = Camera.main.ScreenToWorldPoint( new Vector3( touch.position.x, touch.position.y, 0.0f ) );
-                        Vector2 relativeWorldPosition = new Vector2( transform.position.x - worldPosition.x, transform.position.y - worldPosition.y );
-                        //if ( relativeWorldPosition.magnitude <= weaponReach ) {
-                        //Collider2D enemy = Physics2D.OverlapPoint( worldPosition, 1 << LayerMask.NameToLayer( "Enemies" ) );
-                        //if ( enemy ) {
-                        if ( relativeWorldPosition.x > 0 && facingRight ) {
-                            Flip();
-                        } else if ( relativeWorldPosition.x < 0 && !facingRight ) {
-                            Flip();
-                        }
-                        Vector2 hitPoint = new Vector2( transform.position.x - relativeWorldPosition.normalized.x * weaponReach, transform.position.y - relativeWorldPosition.normalized.y * weaponReach );
-                        RaycastHit2D[] hitEnemies = Physics2D.LinecastAll( transform.position, hitPoint, 1 << LayerMask.NameToLayer( "Enemies" ) );
-                        anim.SetBool( "Attack", true );
-                        foreach ( RaycastHit2D currentEnemy in hitEnemies ) {
-                            Enemy enemyScript = currentEnemy.collider.gameObject.GetComponent<Enemy>();
-                            enemyScript.health -= weaponDamage;
-                            if ( facingRight ) {
-                                currentEnemy.collider.gameObject.rigidbody2D.AddForce( new Vector2( 5000.0f * weaponKnockback, 100.0f * weaponKnockback ) );
-                            } else {
-                                currentEnemy.collider.gameObject.rigidbody2D.AddForce( new Vector2( -5000.0f * weaponKnockback, 100.0f * weaponKnockback ) );
-                            }
-                            enemyScript.playSoundTakeDamage();
-                            playSoundWeaponHit();
-                            //Destroy( other );
-                        }
-                        attackCooldown = attackTime;
-                        //}
-                        //}
-                    }
-                }
             }
 
             // If the jump button is pressed and the player is grounded then the player should jump.
@@ -135,6 +106,39 @@ public class PlayerControl : MonoBehaviour
         }
 	}
 
+    public void attack( Touch touch ) {
+        // Attacks
+        if ( attackCooldown <= 0 ) {
+            Vector2 worldPosition = Camera.main.ScreenToWorldPoint( new Vector3( touch.position.x, touch.position.y, 0.0f ) );
+            Vector2 relativeWorldPosition = new Vector2( transform.position.x - worldPosition.x, transform.position.y - worldPosition.y );
+            //if ( relativeWorldPosition.magnitude <= weaponReach ) {
+            //Collider2D enemy = Physics2D.OverlapPoint( worldPosition, 1 << LayerMask.NameToLayer( "Enemies" ) );
+            //if ( enemy ) {
+            if ( relativeWorldPosition.x > 0 && facingRight ) {
+                Flip();
+            } else if ( relativeWorldPosition.x < 0 && !facingRight ) {
+                Flip();
+            }
+            Vector2 hitPoint = new Vector2( transform.position.x - relativeWorldPosition.normalized.x * weaponReach, transform.position.y - relativeWorldPosition.normalized.y * weaponReach );
+            RaycastHit2D[] hitEnemies = Physics2D.LinecastAll( transform.position, hitPoint, 1 << LayerMask.NameToLayer( "Enemies" ) );
+            anim.SetBool( "Attack", true );
+            foreach ( RaycastHit2D currentEnemy in hitEnemies ) {
+                Enemy enemyScript = currentEnemy.collider.gameObject.GetComponent<Enemy>();
+                enemyScript.health -= weaponDamage;
+                if ( facingRight ) {
+                    currentEnemy.collider.gameObject.rigidbody2D.AddForce( new Vector2( 5000.0f * weaponKnockback, 100.0f * weaponKnockback ) );
+                } else {
+                    currentEnemy.collider.gameObject.rigidbody2D.AddForce( new Vector2( -5000.0f * weaponKnockback, 100.0f * weaponKnockback ) );
+                }
+                enemyScript.playSoundTakeDamage();
+                playSoundWeaponHit();
+                //Destroy( other );
+            }
+            attackCooldown = attackTime;
+            //}
+            //}
+        }
+    }
 
 	void FixedUpdate ()
 	{
@@ -254,5 +258,9 @@ public class PlayerControl : MonoBehaviour
     }
     public void playSoundDefeat() {
         soundDefeat.audio.Play();
+    }
+
+    public void move( float x, float y ) {
+        horizontalInput = x;
     }
 }

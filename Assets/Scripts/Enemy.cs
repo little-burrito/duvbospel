@@ -100,6 +100,25 @@ public class Enemy : MonoBehaviour
             }
         }
         anim.SetBool( "isAttacking", isAttacking );
+
+        // Tap the enemy to attack it
+        if ( Input.touchCount > 0 ) {
+            foreach ( Touch touch in Input.touches ) {
+                if ( touch.phase == TouchPhase.Began ) {
+                    testTouch( touch );
+                }
+            }
+        }
+    }
+
+    private void testTouch( Touch touch ) {
+        Vector3 worldPoint = Camera.main.ScreenToWorldPoint( touch.position );
+        Vector2 touchPosition = new Vector2( worldPoint.x, worldPoint.y );
+        Collider2D hit = Physics2D.OverlapPoint( touchPosition );
+        if ( hit ) {
+            PlayerControl pc = player.GetComponent<PlayerControl>();
+            pc.attack( touch );
+        }
     }
 
 	void FixedUpdate ()
